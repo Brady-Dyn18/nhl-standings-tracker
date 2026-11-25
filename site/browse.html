@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#07111f"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css"><title>NHL Standings Tracker | Browse</title>
+</head>
+<body><div class="shell">
+  <header class="topbar"><a class="brand" href="index.html"><span class="brand-mark">NHL</span><span>Standings<br><b>Tracker</b></span></a><nav aria-label="Primary navigation"><a href="index.html">Today</a><a class="active" href="browse.html">Browse</a><a href="trends.html">Trends</a></nav><div class="live-chip"><span class="live-dot"></span><span id="run-label">Loading run</span></div></header>
+  <main>
+    <section class="page-intro"><p class="eyebrow">The full board</p><h1>Browse the <em>league.</em></h1><p>Search, filter, and sort the latest snapshot. Star teams to build a shortlist that stays in this browser.</p></section>
+    <section class="toolbar" aria-label="Standings filters"><label class="search-field"><span>⌕</span><input id="search" type="search" placeholder="Search team names…"></label><label><span class="control-label">Conference</span><select id="conference"><option value="">All conferences</option></select></label><label><span class="control-label">Division</span><select id="division"><option value="">All divisions</option></select></label><button id="shortlist-only" class="button button-dark" type="button">☆ Shortlist <span id="shortlist-count">0</span></button></section>
+    <section class="table-card"><div class="table-meta"><span id="result-count">— teams</span><span>Click a column heading to sort · stars are saved locally</span></div><div class="table-scroll"><table class="data-table browse-table" id="browse-table"><thead><tr><th data-sort="rank">Rank</th><th data-sort="item">Team</th><th data-sort="conference">Conference</th><th data-sort="division">Division</th><th data-sort="games_played">GP</th><th data-sort="wins">W</th><th data-sort="losses">L</th><th data-sort="ot_losses">OTL</th><th data-sort="points">PTS</th><th data-sort="point_pct">Pts %</th><th data-sort="goals_for">GF</th><th data-sort="goals_against">GA</th><th data-sort="goal_differential">DIFF</th><th aria-label="Shortlist"></th></tr></thead><tbody><tr><td colspan="14" class="loading">Loading standings…</td></tr></tbody></table></div></section>
+  </main><footer><span>NHL Standings Tracker</span><span><a href="index.html">← Today</a> · <a href="trends.html">Trends →</a></span></footer>
+</div><script src="common.js"></script><script src="browse.js"></script></body></html>
