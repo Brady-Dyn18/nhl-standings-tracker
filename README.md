@@ -73,7 +73,7 @@ uv run python -c "from pipeline import build_history; build_history()"
 For a local site preview, serve the project root so the pages can reach `data/`:
 
 ```bash
-python -m http.server 8000
+uv run python -m http.server 8000
 # open http://localhost:8000/site/
 ```
 
