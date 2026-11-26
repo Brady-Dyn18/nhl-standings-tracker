@@ -2,7 +2,9 @@ import csv
 import gzip
 import json
 from pathlib import Path
+from urllib.error import URLError
 
+import pipeline
 from pipeline import HISTORY_COLUMNS, build_history, calculate_move_score, convert_standings, write_raw
 
 
@@ -10,6 +12,7 @@ def payload(*teams):
     return {"standings": [{
         "teamAbbrev": {"default": code}, "teamName": {"default": name},
         "conferenceName": conference, "divisionName": division, "leagueSequence": rank,
+        "conferenceSequence": rank, "divisionSequence": rank, "wildcardSequence": 0,
         "gamesPlayed": games, "wins": wins, "losses": losses, "otLosses": ot_losses,
         "points": points, "pointPctg": points / (games * 2), "goalFor": goals_for,
         "goalAgainst": goals_against, "goalDifferential": goals_for - goals_against,
@@ -52,3 +55,49 @@ def test_raw_snapshot_is_gzipped_json(tmp_path: Path):
     raw = write_raw(b'{"standings": []}', "2026-11-25", tmp_path / "raw")
     with gzip.open(raw, "rt", encoding="utf-8") as source:
         assert json.load(source) == {"standings": []}
+
+
+def test_failed_source_is_recorded_without_writing_a_new_raw_file(tmp_path: Path, monkeypatch):
+    raw_dir, history, status_path = tmp_path / "data" / "raw", tmp_path / "data" / "history.csv", tmp_path / "data" / "status.json"
+    write_raw(json.dumps(payload(("AAA", "Alpha Bears", "Eastern", "Atlantic", 1, 10, 8, 1, 1, 17, 40, 20))).encode(), "2026-11-24", raw_dir)
+    monkeypatch.setattr(pipeline, "RAW_DIR", raw_dir)
+    monkeypatch.setattr(pipeline, "HISTORY_PATH", history)
+    monkeypatch.setattr(pipeline, "STATUS_PATH", status_path)
+    monkeypatch.setattr(pipeline, "fetch_source", lambda **kwargs: (_ for _ in ()).throw(URLError("offline")))
+
+    result = pipeline.run_pipeline(run_date="2026-11-25", publish=False)
+
+    assert result["sources"] == [{"name": "nhl-standings", "ok": False, "count": 0}]
+    assert result["days_with_success"] == 1
+    assert result["latest_data_date"] == "2026-11-24"
+    assert not (raw_dir / "2026-11-25").exists()
+
+
+def test_history_rows_include_playoff_rank_fields():
+    row = convert_standings(payload(("AAA", "Alpha Bears", "Eastern", "Atlantic", 1, 10, 8, 1, 1, 17, 40, 20)), "2026-11-25")[0]
+    assert row["conference_rank"] == 1
+    assert row["division_rank"] == 1
+    assert row["wildcard_rank"] == 0
+
+
+def test_fetch_source_can_target_a_historical_standings_date(monkeypatch):
+    seen = {}
+
+    class Response:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *args):
+            return False
+
+        def read(self):
+            return b'{"standings": []}'
+
+    def fake_urlopen(request, timeout):
+        seen["url"] = request.full_url
+        seen["timeout"] = timeout
+        return Response()
+
+    monkeypatch.setattr(pipeline, "urlopen", fake_urlopen)
+    assert pipeline.fetch_source(date="2026-11-24") == b'{"standings": []}'
+    assert seen == {"url": "https://api-web.nhle.com/v1/standings/2026-11-24", "timeout": 30}

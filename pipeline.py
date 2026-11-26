@@ -24,7 +24,7 @@ SOURCE_NAME = "nhl-standings"
 SOURCE_URL = "https://api-web.nhle.com/v1/standings/now"
 
 HISTORY_COLUMNS = [
-    "date", "item_id", "item", "source", "conference", "division", "rank",
+    "date", "item_id", "item", "source", "conference", "division", "conference_rank", "division_rank", "wildcard_rank", "rank",
     "games_played", "wins", "losses", "ot_losses", "points", "point_pct",
     "goals_for", "goals_against", "goal_differential", "streak_code",
     "streak_count", "season_id", "team_logo",
@@ -69,6 +69,8 @@ def convert_standings(payload: dict[str, Any], date: str) -> list[dict[str, Any]
         rows.append({
             "date": date, "item_id": team_id, "item": team_name, "source": SOURCE_NAME,
             "conference": entry.get("conferenceName", ""), "division": entry.get("divisionName", ""),
+            "conference_rank": _number(entry.get("conferenceSequence")), "division_rank": _number(entry.get("divisionSequence")),
+            "wildcard_rank": _number(entry.get("wildcardSequence")),
             "rank": _number(entry.get("leagueSequence")), "games_played": _number(entry.get("gamesPlayed")),
             "wins": _number(entry.get("wins")), "losses": _number(entry.get("losses")),
             "ot_losses": _number(entry.get("otLosses")), "points": _number(entry.get("points")),
@@ -84,7 +86,9 @@ def convert_standings(payload: dict[str, Any], date: str) -> list[dict[str, Any]
     return sorted(rows, key=lambda row: (str(row["date"]), str(row["item_id"])))
 
 
-def fetch_source(url: str = SOURCE_URL, timeout: int = 30) -> bytes:
+def fetch_source(url: str | None = None, timeout: int = 30, date: str | None = None) -> bytes:
+    if url is None:
+        url = SOURCE_URL if date is None else f"https://api-web.nhle.com/v1/standings/{date}"
     request = Request(url, headers={"User-Agent": "nhl-standings-tracker/1.0"})
     with urlopen(request, timeout=timeout) as response:
         content = response.read()
@@ -259,18 +263,18 @@ def run_pipeline(run_date: str | None = None, offline: bool = False, publish: bo
     source_results: list[dict[str, Any]] = []
     if not offline:
         try:
-            raw_bytes = fetch_source()
-            write_raw(raw_bytes, run_date)
+            raw_bytes = fetch_source(date=run_date)
+            write_raw(raw_bytes, run_date, RAW_DIR)
             count = len(convert_standings(json.loads(raw_bytes), run_date))
             source_results.append({"name": SOURCE_NAME, "ok": True, "count": count})
         except (HTTPError, URLError, TimeoutError, ValueError, OSError) as error:
             print(f"source failed: {error}", file=sys.stderr)
             source_results.append({"name": SOURCE_NAME, "ok": False, "count": 0})
     else:
-        latest_count = sum(1 for row in build_history() if row.get("date") == run_date)
+        latest_count = sum(1 for row in build_history(RAW_DIR, HISTORY_PATH) if row.get("date") == run_date)
         source_results.append({"name": SOURCE_NAME, "ok": True, "count": latest_count})
-    rows = build_history()
-    status = write_status(rows, source_results, run_time)
+    rows = build_history(RAW_DIR, HISTORY_PATH)
+    status = write_status(rows, source_results, run_time, STATUS_PATH)
     latest_date = status.get("latest_data_date")
     latest_rows = [row for row in rows if row.get("date") == latest_date]
     prior = previous_date(rows, latest_date) if latest_date else None

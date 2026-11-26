@@ -1,13 +1,15 @@
 (async function () {
   const $ = id => document.getElementById(id);
-  const state = { rows: [], filtered: [], sort: 'rank', direction: 1, shortlistOnly: false, stars: JSON.parse(localStorage.getItem('nhl-shortlist') || '[]') };
+  const state = { rows: [], filtered: [], sort: 'rank', direction: 1, shortlistOnly: false, stars: JSON.parse(localStorage.getItem('nhl-shortlist') || '[]'), dates: [] };
   try {
     const { status, rows } = await NHLTracker.loadData();
     const date = status.latest_data_date || [...new Set(rows.map(row => row.date))].sort().pop();
-    state.rows = NHLTracker.latestRows(rows, date);
+    state.dates = [...new Set(rows.map(row => row.date))].sort();
+    const firstDate = state.dates[0], sevenDayDate = state.dates[Math.max(0, state.dates.length - 8)];
+    state.rows = NHLTracker.latestRows(rows, date).map(row => ({ ...row, delta_7: deltaSince(row, rows, sevenDayDate), delta_season: deltaSince(row, rows, firstDate) }));
     $('run-label').textContent = date ? `Data · ${date}` : 'No run yet';
-    for (const value of [...new Set(state.rows.map(row => row.conference))].sort()) $('conference').insertAdjacentHTML('beforeend', `<option>${value}</option>`);
-    for (const value of [...new Set(state.rows.map(row => row.division))].sort()) $('division').insertAdjacentHTML('beforeend', `<option>${value}</option>`);
+    for (const value of [...new Set(state.rows.map(row => row.conference))].sort()) $('conference').insertAdjacentHTML('beforeend', `<option>${NHLTracker.escapeHtml(value)}</option>`);
+    for (const value of [...new Set(state.rows.map(row => row.division))].sort()) $('division').insertAdjacentHTML('beforeend', `<option>${NHLTracker.escapeHtml(value)}</option>`);
     render();
   } catch (error) { $('result-count').textContent = error.message; }
 
@@ -22,6 +24,9 @@
     state.filtered.sort((a, b) => { const av = a[state.sort], bv = b[state.sort]; if (state.sort === 'item' || state.sort === 'conference' || state.sort === 'division') return state.direction * String(av).localeCompare(String(bv)); return state.direction * ((Number(av) || 0) - (Number(bv) || 0)); });
     $('shortlist-count').textContent = state.stars.length;
     $('result-count').textContent = `${state.filtered.length} team${state.filtered.length === 1 ? '' : 's'}`;
-    $('browse-table').querySelector('tbody').innerHTML = state.filtered.map(row => `<tr><td class="rank">${row.rank}</td><td><strong>${row.item}</strong><small>${row.item_id}</small></td><td>${row.conference}</td><td>${row.division}</td><td>${row.games_played}</td><td>${row.wins}</td><td>${row.losses}</td><td>${row.ot_losses}</td><td class="points">${row.points}</td><td>${NHLTracker.pct(row.point_pct)}</td><td>${row.goals_for}</td><td>${row.goals_against}</td><td class="${Number(row.goal_differential) >= 0 ? 'positive' : 'negative'}">${Number(row.goal_differential) > 0 ? '+' : ''}${row.goal_differential}</td><td><button class="star ${state.stars.includes(row.item_id) ? 'selected' : ''}" data-star="${row.item_id}" aria-label="${state.stars.includes(row.item_id) ? 'Remove' : 'Add'} ${row.item} ${state.stars.includes(row.item_id) ? 'from' : 'to'} shortlist">${state.stars.includes(row.item_id) ? '★' : '☆'}</button></td></tr>`).join('') || '<tr><td colspan="14" class="empty">No teams match these filters.</td></tr>';
+    $('browse-table').querySelector('tbody').innerHTML = state.filtered.map(row => { const playoff = NHLTracker.playoffStatus(row, state.rows); return `<tr><td class="rank">${row.rank}</td><td><div class="team-name">${NHLTracker.logoMarkup(row)}<span><strong>${NHLTracker.escapeHtml(row.item)}</strong><small>${NHLTracker.escapeHtml(row.item_id)}</small></span></div></td><td>${NHLTracker.escapeHtml(row.conference)}</td><td>${NHLTracker.escapeHtml(row.division)}</td><td>${row.games_played}</td><td>${row.wins}</td><td>${row.losses}</td><td>${row.ot_losses}</td><td class="points">${row.points}</td><td>${NHLTracker.pct(row.point_pct)}</td><td class="${Number(row.delta_7) >= 0 ? 'positive' : 'negative'}">${deltaText(row.delta_7)}</td><td class="${Number(row.delta_season) >= 0 ? 'positive' : 'negative'}">${deltaText(row.delta_season)}</td><td>${row.goals_for}</td><td>${row.goals_against}</td><td class="${Number(row.goal_differential) >= 0 ? 'positive' : 'negative'}">${Number(row.goal_differential) > 0 ? '+' : ''}${row.goal_differential}</td><td><span class="playoff-badge ${playoff.className}">${playoff.label}</span></td><td><button class="star ${state.stars.includes(row.item_id) ? 'selected' : ''}" data-star="${NHLTracker.escapeHtml(row.item_id)}" aria-label="${state.stars.includes(row.item_id) ? 'Remove' : 'Add'} ${NHLTracker.escapeHtml(row.item)} ${state.stars.includes(row.item_id) ? 'from' : 'to'} shortlist">${state.stars.includes(row.item_id) ? '★' : '☆'}</button></td></tr>`; }).join('') || '<tr><td colspan="17" class="empty">No teams match these filters.</td></tr>';
   }
+
+  function deltaSince(row, allRows, date) { const old = allRows.find(item => item.item_id === row.item_id && item.date === date); return old ? Number(row.points) - Number(old.points) : 0; }
+  function deltaText(value) { const delta = Number(value) || 0; return `${delta > 0 ? '+' : ''}${delta}`; }
 }());

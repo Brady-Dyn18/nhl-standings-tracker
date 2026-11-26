@@ -70,8 +70,21 @@ def snapshot(day_offset: int) -> dict:
             "seasonId": 20262027, "teamLogo": f"https://assets.nhle.com/logos/nhl/svg/{code}_light.svg",
         })
     rows.sort(key=lambda row: (-row["points"], -row["goalDifferential"], row["teamAbbrev"]["default"]))
+    conference_ranks = {}
+    division_ranks = {}
     for rank, row in enumerate(rows, 1):
         row["leagueSequence"] = rank
+        conference_ranks[row["conferenceName"]] = conference_ranks.get(row["conferenceName"], 0) + 1
+        division_ranks[row["divisionName"]] = division_ranks.get(row["divisionName"], 0) + 1
+        row["conferenceSequence"] = conference_ranks[row["conferenceName"]]
+        row["divisionSequence"] = division_ranks[row["divisionName"]]
+        row["wildcardSequence"] = 0
+    wildcard_ranks = {}
+    for row in rows:
+        if row["divisionSequence"] > 3:
+            conference = row["conferenceName"]
+            wildcard_ranks[conference] = wildcard_ranks.get(conference, 0) + 1
+            row["wildcardSequence"] = wildcard_ranks[conference]
     return {"standingsDateTimeUtc": f"2026-11-{24 + day_offset:02d}T06:15:00Z", "standings": rows}
 
 

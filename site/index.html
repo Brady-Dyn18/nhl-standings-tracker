@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07111f">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
   <title>NHL Standings Tracker | Today</title>
@@ -39,7 +41,7 @@
       </section>
 
       <section class="section-heading"><div><p class="eyebrow">Latest snapshot <span id="snapshot-date">—</span></p><h2>The league at a glance</h2></div><a class="text-link" href="browse.html">Full standings <span>→</span></a></section>
-      <section class="table-card"><div class="table-scroll"><table class="data-table" id="today-table"><thead><tr><th>Rank</th><th>Team</th><th>Division</th><th>GP</th><th>W</th><th>L</th><th>OTL</th><th>PTS</th><th>Pts %</th><th>Change</th></tr></thead><tbody><tr><td colspan="10" class="loading">Loading standings…</td></tr></tbody></table></div></section>
+      <section class="table-card"><div class="table-scroll"><table class="data-table" id="today-table"><thead><tr><th>Rank</th><th>Team</th><th>Division</th><th>GP</th><th>W</th><th>L</th><th>OTL</th><th>PTS</th><th>Pts %</th><th>Playoff</th><th>Change</th></tr></thead><tbody><tr><td colspan="11" class="loading">Loading standings…</td></tr></tbody></table></div></section>
 
       <section class="two-col">
         <article class="panel"><div class="panel-heading"><div><p class="eyebrow">Movement monitor</p><h2>Biggest moves</h2></div><span class="panel-icon">↗</span></div><div id="moves-list" class="moves-list"><div class="loading">Calculating movement…</div></div><p class="method-note">Move score = absolute points change + absolute rank change.</p></article>
@@ -48,6 +50,6 @@
     </main>
     <footer><span>NHL Standings Tracker</span><span>Public NHL standings data · <a href="trends.html">See the history →</a></span></footer>
   </div>
-  <script src="common.js"></script><script src="app.js"></script>
+  <script src="common.js?v=2"></script><script src="app.js?v=2"></script>
 </body>
 </html>

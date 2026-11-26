@@ -38,6 +38,9 @@ The Today page and daily issue list the ten highest-scoring teams. New teams rec
 | `source` | Source label | text |
 | `conference` | Eastern or Western conference | text |
 | `division` | Atlantic, Metropolitan, Central, or Pacific | text |
+| `conference_rank` | Team's rank within its conference | ordinal |
+| `division_rank` | Team's rank within its division | ordinal |
+| `wildcard_rank` | Wild-card sequence supplied by the source; zero means not in the wildcard pool | ordinal |
 | `rank` | League-wide sequence in the source response | ordinal |
 | `games_played` | Games played | games |
 | `wins` | Regulation or overtime wins | wins |
@@ -102,6 +105,9 @@ pytest -q
 | `site/styles.css` | Shared responsive visual system. |
 | `site/manifest.webmanifest` | Installable web app metadata. |
 | `site/icon.svg` | App icon used by the manifest. |
+| `site/icon-192.png` and `site/icon-512.png` | Installable PWA icons generated from the same icon design. |
+| `scripts/create_icons.swift` | Recreates the PNG app icons on macOS. |
+| `submission.txt` | Four-line submission template for name, student ID, repository URL, and live site URL. |
 | `site/sw.js` | Offline app-shell and data cache. |
 | `.github/workflows/ci.yml` | Tests on every push and pull request. |
 | `.github/workflows/daily.yml` | Daily fetch, build, issue, and commit workflow. |
@@ -116,3 +122,5 @@ pytest -q
 4. Run the daily workflow manually once to seed the first raw snapshot, then let the schedule build the seven-day history required by the assignment.
 
 The checked-in preview data is synthetic and is only there so the three pages are useful before the first network run. Generate it again with `uv run python scripts/seed_demo.py`; scheduled runs always use the live NHL endpoint.
+
+Before submitting, replace the synthetic preview snapshots by running the live workflow. Do not use `--date` to manufacture seven successful run days; use the daily schedule or manual workflow runs on the actual dates. The date override is for recovery and for testing the NHL historical endpoint.
