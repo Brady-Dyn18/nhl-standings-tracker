@@ -1,9 +1,8 @@
 name: Publish site
 
 on:
-  workflow_run:
-    workflows: ["Daily NHL standings"]
-    types: [completed]
+  push:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -17,7 +16,6 @@ concurrency:
 
 jobs:
   deploy:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
