@@ -1,36 +1,36 @@
 date,item_id,item,source,conference,division,conference_rank,division_rank,wildcard_rank,rank,games_played,wins,losses,ot_losses,points,point_pct,goals_for,goals_against,goal_differential,streak_code,streak_count,season_id,team_logo
-2026-11-24,ANA,Anaheim Ducks,nhl-standings,Western,Pacific,16,8,10,32,18,5,9,4,14,0.388889,48,75,-27,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/ANA_light.svg
-2026-11-24,BOS,Boston Bruins,nhl-standings,Eastern,Atlantic,14,8,8,19,21,10,7,4,24,0.571429,50,74,-24,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/BOS_light.svg
-2026-11-24,BUF,Buffalo Sabres,nhl-standings,Eastern,Atlantic,4,3,0,4,24,15,6,3,33,0.6875,52,73,-21,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/BUF_light.svg
-2026-11-24,CAR,Carolina Hurricanes,nhl-standings,Eastern,Metropolitan,7,3,0,9,22,13,5,4,30,0.681818,56,71,-15,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/CAR_light.svg
-2026-11-24,CBJ,Columbus Blue Jackets,nhl-standings,Eastern,Metropolitan,1,1,0,1,23,16,3,4,36,0.782609,62,68,-6,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg
-2026-11-24,CGY,Calgary Flames,nhl-standings,Western,Pacific,9,3,0,24,19,8,8,3,19,0.5,54,72,-18,L,4,20262027,https://assets.nhle.com/logos/nhl/svg/CGY_light.svg
-2026-11-24,CHI,Chicago Blackhawks,nhl-standings,Western,Central,13,7,7,29,25,6,15,4,16,0.32,58,70,-12,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/CHI_light.svg
-2026-11-24,COL,Colorado Avalanche,nhl-standings,Western,Central,5,3,0,18,20,11,7,2,24,0.6,60,69,-9,L,3,20262027,https://assets.nhle.com/logos/nhl/svg/COL_light.svg
-2026-11-24,DAL,Dallas Stars,nhl-standings,Western,Central,6,4,1,21,18,9,5,4,22,0.611111,64,67,-3,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/DAL_light.svg
-2026-11-24,DET,Detroit Red Wings,nhl-standings,Eastern,Atlantic,8,5,2,10,21,14,6,1,29,0.690476,66,66,0,L,2,20262027,https://assets.nhle.com/logos/nhl/svg/DET_light.svg
-2026-11-24,EDM,Edmonton Oilers,nhl-standings,Western,Pacific,11,5,5,26,24,7,13,4,18,0.375,68,65,3,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/EDM_light.svg
-2026-11-24,FLA,Florida Panthers,nhl-standings,Eastern,Atlantic,9,6,3,12,19,12,3,4,28,0.736842,70,64,6,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/FLA_light.svg
-2026-11-24,LAK,Los Angeles Kings,nhl-standings,Western,Pacific,15,7,9,31,22,5,13,4,14,0.318182,72,63,9,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/LAK_light.svg
-2026-11-24,MIN,Minnesota Wild,nhl-standings,Western,Central,4,2,0,17,25,10,11,4,24,0.48,74,62,12,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/MIN_light.svg
-2026-11-24,MTL,Montréal Canadiens,nhl-standings,Eastern,Atlantic,3,2,0,3,20,15,2,3,33,0.825,76,61,15,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/MTL_light.svg
-2026-11-24,NJD,New Jersey Devils,nhl-standings,Eastern,Metropolitan,11,5,5,14,18,13,6,0,26,0.722222,80,59,21,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/NJD_light.svg
-2026-11-24,NSH,Nashville Predators,nhl-standings,Western,Central,8,6,3,23,23,8,11,4,20,0.434783,78,60,18,L,4,20262027,https://assets.nhle.com/logos/nhl/svg/NSH_light.svg
-2026-11-24,NYI,New York Islanders,nhl-standings,Eastern,Metropolitan,16,8,10,28,21,6,11,4,16,0.380952,82,58,24,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/NYI_light.svg
-2026-11-24,NYR,New York Rangers,nhl-standings,Eastern,Metropolitan,10,4,4,13,24,11,9,4,26,0.541667,84,57,27,L,3,20262027,https://assets.nhle.com/logos/nhl/svg/NYR_light.svg
-2026-11-24,OTT,Ottawa Senators,nhl-standings,Eastern,Atlantic,6,4,1,7,19,16,5,0,32,0.842105,86,56,30,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/OTT_light.svg
-2026-11-24,PHI,Philadelphia Flyers,nhl-standings,Eastern,Metropolitan,15,7,9,20,22,9,9,4,22,0.5,88,55,33,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/PHI_light.svg
-2026-11-24,PIT,Pittsburgh Penguins,nhl-standings,Eastern,Metropolitan,5,2,0,6,25,14,7,4,32,0.64,90,54,36,L,2,20262027,https://assets.nhle.com/logos/nhl/svg/PIT_light.svg
-2026-11-24,SEA,Seattle Kraken,nhl-standings,Western,Pacific,3,2,0,11,23,12,7,4,28,0.608696,94,52,42,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/SEA_light.svg
-2026-11-24,SJS,San Jose Sharks,nhl-standings,Western,Pacific,10,4,4,25,20,7,9,4,18,0.45,92,53,39,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/SJS_light.svg
-2026-11-24,STL,St. Louis Blues,nhl-standings,Western,Central,14,8,8,30,18,5,9,4,14,0.388889,96,51,45,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/STL_light.svg
-2026-11-24,TBL,Tampa Bay Lightning,nhl-standings,Eastern,Atlantic,13,7,7,16,21,10,7,4,24,0.571429,98,50,48,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/TBL_light.svg
-2026-11-24,TOR,Toronto Maple Leafs,nhl-standings,Eastern,Atlantic,2,1,0,2,24,15,5,4,34,0.708333,100,49,51,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/TOR_light.svg
-2026-11-24,UTA,Utah Mammoth,nhl-standings,Western,Central,7,5,2,22,19,8,7,4,20,0.526316,102,48,54,L,4,20262027,https://assets.nhle.com/logos/nhl/svg/UTA_light.svg
-2026-11-24,VAN,Vancouver Canucks,nhl-standings,Western,Pacific,2,1,0,8,22,13,5,4,30,0.681818,104,47,57,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/VAN_light.svg
-2026-11-24,VGK,Vegas Golden Knights,nhl-standings,Western,Pacific,12,6,6,27,25,6,15,4,16,0.32,106,46,60,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/VGK_light.svg
-2026-11-24,WPG,Winnipeg Jets,nhl-standings,Western,Central,1,1,0,5,23,16,8,0,32,0.695652,110,44,66,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/WPG_light.svg
-2026-11-24,WSH,Washington Capitals,nhl-standings,Eastern,Metropolitan,12,6,6,15,20,11,6,3,25,0.625,108,45,63,L,3,20262027,https://assets.nhle.com/logos/nhl/svg/WSH_light.svg
+2026-11-24,ANA,Anaheim Ducks,nhl-standings,Western,Pacific,12,5,6,23,25,11,13,1,23,0.46,89,95,-6,L,4,20262027,https://assets.nhle.com/logos/nhl/svg/ANA_light.svg
+2026-11-24,BOS,Boston Bruins,nhl-standings,Eastern,Atlantic,6,4,1,10,23,15,7,1,31,0.673913,83,61,22,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/BOS_light.svg
+2026-11-24,BUF,Buffalo Sabres,nhl-standings,Eastern,Atlantic,10,6,4,19,24,10,10,4,24,0.5,73,83,-10,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/BUF_light.svg
+2026-11-24,CAR,Carolina Hurricanes,nhl-standings,Eastern,Metropolitan,1,1,0,2,24,18,3,3,39,0.8125,100,55,45,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/CAR_light.svg
+2026-11-24,CBJ,Columbus Blue Jackets,nhl-standings,Eastern,Metropolitan,15,7,9,29,22,9,13,0,18,0.409091,56,71,-15,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/CBJ_light.svg
+2026-11-24,CGY,Calgary Flames,nhl-standings,Western,Pacific,13,6,7,24,25,10,13,2,22,0.44,61,86,-25,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/CGY_light.svg
+2026-11-24,CHI,Chicago Blackhawks,nhl-standings,Western,Central,15,8,9,30,24,8,14,2,18,0.375,64,96,-32,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/CHI_light.svg
+2026-11-24,COL,Colorado Avalanche,nhl-standings,Western,Central,5,3,0,11,23,13,7,3,29,0.630435,90,68,22,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/COL_light.svg
+2026-11-24,DAL,Dallas Stars,nhl-standings,Western,Central,4,2,0,7,23,15,6,2,32,0.695652,65,56,9,W,5,20262027,https://assets.nhle.com/logos/nhl/svg/DAL_light.svg
+2026-11-24,DET,Detroit Red Wings,nhl-standings,Eastern,Atlantic,14,8,8,27,23,8,12,3,19,0.413043,60,71,-11,L,2,20262027,https://assets.nhle.com/logos/nhl/svg/DET_light.svg
+2026-11-24,EDM,Edmonton Oilers,nhl-standings,Western,Pacific,2,1,0,3,27,17,6,4,38,0.703704,104,82,22,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/EDM_light.svg
+2026-11-24,FLA,Florida Panthers,nhl-standings,Eastern,Atlantic,7,5,2,13,24,13,8,3,29,0.604167,76,71,5,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/FLA_light.svg
+2026-11-24,LAK,Los Angeles Kings,nhl-standings,Western,Pacific,14,7,8,28,22,8,12,2,18,0.409091,60,71,-11,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/LAK_light.svg
+2026-11-24,MIN,Minnesota Wild,nhl-standings,Western,Central,1,1,0,1,26,18,3,5,41,0.788462,95,58,37,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/MIN_light.svg
+2026-11-24,MTL,Montréal Canadiens,nhl-standings,Eastern,Atlantic,5,3,0,9,25,14,7,4,32,0.64,78,73,5,L,2,20262027,https://assets.nhle.com/logos/nhl/svg/MTL_light.svg
+2026-11-24,NJD,New Jersey Devils,nhl-standings,Eastern,Metropolitan,4,2,0,8,24,16,8,0,32,0.666667,91,75,16,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/NJD_light.svg
+2026-11-24,NSH,Nashville Predators,nhl-standings,Western,Central,6,4,1,12,23,12,6,5,29,0.630435,71,69,2,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/NSH_light.svg
+2026-11-24,NYI,New York Islanders,nhl-standings,Eastern,Metropolitan,9,4,3,17,23,11,7,5,27,0.586957,73,67,6,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/NYI_light.svg
+2026-11-24,NYR,New York Rangers,nhl-standings,Eastern,Metropolitan,8,3,0,16,23,13,9,1,27,0.586957,69,63,6,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/NYR_light.svg
+2026-11-24,OTT,Ottawa Senators,nhl-standings,Eastern,Atlantic,2,1,0,4,25,16,6,3,35,0.7,81,71,10,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/OTT_light.svg
+2026-11-24,PHI,Philadelphia Flyers,nhl-standings,Eastern,Metropolitan,11,5,5,20,26,9,11,6,24,0.461538,67,88,-21,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/PHI_light.svg
+2026-11-24,PIT,Pittsburgh Penguins,nhl-standings,Eastern,Metropolitan,16,8,10,31,23,7,14,2,16,0.347826,67,81,-14,L,4,20262027,https://assets.nhle.com/logos/nhl/svg/PIT_light.svg
+2026-11-24,SEA,Seattle Kraken,nhl-standings,Western,Pacific,11,4,5,22,21,11,9,1,23,0.547619,70,73,-3,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/SEA_light.svg
+2026-11-24,SJS,San Jose Sharks,nhl-standings,Western,Pacific,10,3,0,21,26,11,13,2,24,0.461538,71,94,-23,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/SJS_light.svg
+2026-11-24,STL,St. Louis Blues,nhl-standings,Western,Central,7,5,2,14,24,13,9,2,28,0.583333,82,77,5,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/STL_light.svg
+2026-11-24,TBL,Tampa Bay Lightning,nhl-standings,Eastern,Atlantic,3,2,0,6,23,15,6,2,32,0.695652,84,68,16,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/TBL_light.svg
+2026-11-24,TOR,Toronto Maple Leafs,nhl-standings,Eastern,Atlantic,12,7,6,25,26,9,14,3,21,0.403846,82,92,-10,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/TOR_light.svg
+2026-11-24,UTA,Utah Mammoth,nhl-standings,Western,Central,9,7,4,18,25,12,10,3,27,0.54,82,85,-3,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/UTA_light.svg
+2026-11-24,VAN,Vancouver Canucks,nhl-standings,Western,Pacific,16,8,10,32,26,6,19,1,13,0.25,74,114,-40,L,1,20262027,https://assets.nhle.com/logos/nhl/svg/VAN_light.svg
+2026-11-24,VGK,Vegas Golden Knights,nhl-standings,Western,Pacific,3,2,0,5,26,15,6,5,35,0.673077,90,78,12,W,2,20262027,https://assets.nhle.com/logos/nhl/svg/VGK_light.svg
+2026-11-24,WPG,Winnipeg Jets,nhl-standings,Western,Central,8,6,3,15,25,12,9,4,28,0.56,79,84,-5,W,1,20262027,https://assets.nhle.com/logos/nhl/svg/WPG_light.svg
+2026-11-24,WSH,Washington Capitals,nhl-standings,Eastern,Metropolitan,13,6,7,26,21,10,11,0,20,0.47619,72,83,-11,L,5,20262027,https://assets.nhle.com/logos/nhl/svg/WSH_secondary_light.svg
 2026-11-25,ANA,Anaheim Ducks,nhl-standings,Western,Pacific,15,8,9,26,19,7,8,4,18,0.473684,48,76,-28,L,2,20262027,https://assets.nhle.com/logos/nhl/svg/ANA_light.svg
 2026-11-25,BOS,Boston Bruins,nhl-standings,Eastern,Atlantic,8,4,2,10,22,12,6,4,28,0.636364,51,76,-25,W,3,20262027,https://assets.nhle.com/logos/nhl/svg/BOS_light.svg
 2026-11-25,BUF,Buffalo Sabres,nhl-standings,Eastern,Atlantic,16,8,10,32,25,5,16,4,14,0.28,54,73,-19,W,4,20262027,https://assets.nhle.com/logos/nhl/svg/BUF_light.svg
