@@ -1,4 +1,4 @@
-const CACHE = 'nhl-tracker-v2';
+const CACHE = 'nhl-tracker-v3';
 const APP_SHELL = ['./', './index.html', './browse.html', './trends.html', './common.js', './app.js', './browse.js', './trends.js', './styles.css', './manifest.webmanifest', './icon.svg', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(APP_SHELL))));
 self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE).map(key => caches.delete(key)))).then(() => self.clients.claim())));

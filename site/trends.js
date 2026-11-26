@@ -9,14 +9,38 @@
     const teams = [...new Map(rows.map(row => [row.item_id, row])).values()].sort((a, b) => a.item.localeCompare(b.item));
     $('run-label').textContent = status.latest_data_date ? `Data · ${status.latest_data_date}` : 'No run yet';
     $('trend-summary').textContent = `${NHLTracker.fmt(dates.length)} captured day${dates.length === 1 ? '' : 's'} · ${NHLTracker.fmt(latest.length)} teams in the latest snapshot. Every number below is calculated in your browser from history.csv.`;
-    teams.forEach(team => $('trend-teams').insertAdjacentHTML('beforeend', `<option value="${NHLTracker.escapeHtml(team.item_id)}">${NHLTracker.escapeHtml(team.item)}</option>`));
-    [...$('trend-teams').options].slice(0, 4).forEach(option => { option.selected = true; });
-    $('trend-teams').addEventListener('change', drawMain); $('trend-metric').addEventListener('change', drawMain); window.addEventListener('resize', drawMain);
+    const selectedTeamIds = new Set([...latest].sort((a, b) => Number(a.rank) - Number(b.rank)).slice(0, 4).map(team => team.item_id));
+    renderTeamPicker();
+    $('trend-teams').addEventListener('click', event => {
+      const button = event.target.closest('[data-team]');
+      if (!button) return;
+      const id = button.dataset.team;
+      if (selectedTeamIds.has(id)) selectedTeamIds.delete(id);
+      else if (selectedTeamIds.size < 6) selectedTeamIds.add(id);
+      renderTeamPicker();
+      drawMain();
+    });
+    $('trend-metric').addEventListener('change', drawMain); window.addEventListener('resize', drawMain);
     drawMain(); buildFindings(); buildComparisons();
 
-    function selectedTeams() { return [...$('trend-teams').selectedOptions].slice(0, 6).map(option => option.value); }
+    function renderTeamPicker() {
+      $('trend-teams').innerHTML = teams.map(team => {
+        const selected = selectedTeamIds.has(team.item_id);
+        return `<button type="button" class="team-option${selected ? ' selected' : ''}" data-team="${NHLTracker.escapeHtml(team.item_id)}" aria-pressed="${selected}"><span class="team-option-mark" aria-hidden="true"></span>${NHLTracker.escapeHtml(team.item)}</button>`;
+      }).join('');
+      $('selected-teams-label').textContent = `${selectedTeamIds.size} selected · max 6`;
+    }
+    function selectedTeams() { return [...selectedTeamIds]; }
     function drawMain() {
       const selected = selectedTeams(), metric = $('trend-metric').value;
+      const descriptions = {
+        points: 'Points are cumulative standings points. A rising line means a team is adding points faster than the others.',
+        rank: 'League rank is ordered from 1 to 32. Lower numbers are better, so the best teams appear higher on this chart.',
+        point_pct: 'Points percentage is points divided by possible points. It makes teams easier to compare when games played differ.',
+        goal_differential: 'Goal differential is goals for minus goals against. Positive movement means a team is outscoring opponents overall.',
+        wins: 'Wins are regulation or overtime wins recorded in each snapshot.'
+      };
+      $('metric-description').textContent = descriptions[metric];
       drawChart($('main-chart'), dates, selected.map(id => ({ label: teams.find(team => team.item_id === id)?.item || id, values: dates.map(date => { const row = rows.find(item => item.date === date && item.item_id === id); return row ? Number(row[metric]) : null; }) })), { invert: metric === 'rank', legendId: 'main-legend' });
     }
     function buildFindings() {
@@ -61,9 +85,12 @@
     const padding = { top: 20, right: 18, bottom: 30, left: 42 }, values = series.flatMap(item => item.values).filter(value => Number.isFinite(value)); if (!values.length) return;
     let min = Math.min(...values), max = Math.max(...values); if (min === max) { min -= 1; max += 1; }
     const x = i => padding.left + (labels.length === 1 ? (width - padding.left - padding.right) / 2 : i * (width - padding.left - padding.right) / (labels.length - 1));
-    const y = value => padding.top + (max - value) * (height - padding.top - padding.bottom) / (max - min);
+    const y = value => options.invert
+      ? padding.top + (value - min) * (height - padding.top - padding.bottom) / (max - min)
+      : padding.top + (max - value) * (height - padding.top - padding.bottom) / (max - min);
     ctx.strokeStyle = '#dbe4ee'; ctx.lineWidth = 1; for (let i = 0; i < 4; i += 1) { const yy = padding.top + i * (height - padding.top - padding.bottom) / 3; ctx.beginPath(); ctx.moveTo(padding.left, yy); ctx.lineTo(width - padding.right, yy); ctx.stroke(); }
     series.forEach((item, seriesIndex) => { ctx.strokeStyle = chartColors[seriesIndex % chartColors.length]; ctx.lineWidth = 2.5; ctx.beginPath(); let started = false; item.values.forEach((value, i) => { if (!Number.isFinite(value)) { started = false; return; } if (!started) { ctx.moveTo(x(i), y(value)); started = true; } else ctx.lineTo(x(i), y(value)); }); ctx.stroke(); const last = item.values.map((value, i) => ({ value, i })).filter(point => Number.isFinite(point.value)).at(-1); if (last) { ctx.fillStyle = chartColors[seriesIndex % chartColors.length]; ctx.beginPath(); ctx.arc(x(last.i), y(last.value), 4, 0, Math.PI * 2); ctx.fill(); } });
-    ctx.fillStyle = '#718096'; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'left'; ctx.fillText(NHLTracker.fmt(max, options.invert ? 0 : 1), 4, padding.top + 4); ctx.fillText(NHLTracker.fmt(min, options.invert ? 0 : 1), 4, height - padding.bottom); ctx.textAlign = 'center'; if (labels.length > 1) { ctx.fillText(String(labels[0]).slice(0, 10), x(0), height - 8); ctx.fillText(String(labels.at(-1)).slice(0, 10), x(labels.length - 1), height - 8); }
+    const topLabel = options.invert ? min : max, bottomLabel = options.invert ? max : min;
+    ctx.fillStyle = '#718096'; ctx.font = '11px Inter, sans-serif'; ctx.textAlign = 'left'; ctx.fillText(NHLTracker.fmt(topLabel, options.invert ? 0 : 1), 4, padding.top + 4); ctx.fillText(NHLTracker.fmt(bottomLabel, options.invert ? 0 : 1), 4, height - padding.bottom); ctx.textAlign = 'center'; if (labels.length > 1) { ctx.fillText(String(labels[0]).slice(0, 10), x(0), height - 8); ctx.fillText(String(labels.at(-1)).slice(0, 10), x(labels.length - 1), height - 8); }
   }
 }());
