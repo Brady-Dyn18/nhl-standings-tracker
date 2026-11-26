@@ -20,6 +20,11 @@
       renderTeamPicker();
       drawMain();
     });
+    $('clear-trend').addEventListener('click', () => {
+      selectedTeamIds.clear();
+      renderTeamPicker();
+      drawMain();
+    });
     $('trend-metric').addEventListener('change', drawMain); window.addEventListener('resize', drawMain);
     drawMain(); buildFindings(); buildComparisons();
 
