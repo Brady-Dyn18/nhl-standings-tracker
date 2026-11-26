@@ -1,4 +1,4 @@
 Your Name
 Your Student ID
-https://github.com/your-account/nhl-standings-tracker
-https://your-account.github.io/nhl-standings-tracker/
+https://github.com/Brady-Dyn18/nhl-standings-tracker
+https://brady-dyn18.github.io/nhl-standings-tracker/
