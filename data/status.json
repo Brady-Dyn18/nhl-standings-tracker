@@ -1,7 +1,7 @@
 {
-  "run_time": "2026-11-26T16:56:28.566060Z",
+  "run_time": "2026-11-27T16:41:43.194908Z",
   "first_run_date": "2026-11-24",
-  "days_with_success": 3,
+  "days_with_success": 4,
   "items": 32,
   "new_today": [],
   "gone_today": [],
@@ -12,5 +12,5 @@
       "count": 32
     }
   ],
-  "latest_data_date": "2026-11-26"
+  "latest_data_date": "2026-11-27"
 }
